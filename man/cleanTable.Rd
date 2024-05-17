@@ -17,7 +17,7 @@ cleanTable(txt, rowsplit = "|", newline = "\\\\n")
 A dataframe parsed from the text string
 }
 \description{
-This function takes a text string from the sendPrompt function and attempts to parse it to a dataframe. Much of the parsing was done via trial and error in trying to understand how Gemini returns tables. In general, it is important to specify the column names in the sendPrompt function and how the text should be delimited. The default values in this function should work ok when no particular instructions were given, but it is very important to verify the output.
+This function takes a text string from the sendPrompt function and attempts to parse it to a dataframe. The procedure was developed via trial and error in trying to understand how Gemini returns tables. In general, it is important to specify the column names in the sendPrompt function and how the text should be delimited. The default values in this function should work ok when no particular instructions were given, but it is very important to verify the output.
 }
 \examples{
 \dontrun{

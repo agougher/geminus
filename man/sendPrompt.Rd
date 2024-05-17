@@ -10,7 +10,7 @@ sendPrompt(
   apiKey = NULL,
   image = NULL,
   temperature = 0,
-  safety = "BLOCK_LOW_AND_ABOVE"
+  safety = "BLOCK_MEDIUM_AND_ABOVE"
 )
 }
 \arguments{
@@ -24,7 +24,7 @@ sendPrompt(
 
 \item{temperature}{numeric value between 0 and 1. Temperature is a Gemini parameter that controls the degree of randomness and creativity in the response. For more deterministic and repeatable responses, use a lower number. Higher temperatures may yield greater possibility of hallucination.}
 
-\item{safety}{Threshold for blocking responses. Currently, only one value can be set for all safety categories. Possible values are "HARM_BLOCK_THRESHOLD_UNSPECIFIED", "BLOCK_LOW_AND_ABOVE","BLOCK_MEDIUM_AND_ABOVE","BLOCK_ONLY_HIGH". The default value is "BLOCK_LOW_AND_ABOVE".}
+\item{safety}{Safety threshold for blocking responses. Currently, only one value can be set for all safety categories. Possible values are "HARM_BLOCK_THRESHOLD_UNSPECIFIED", "BLOCK_LOW_AND_ABOVE","BLOCK_MEDIUM_AND_ABOVE","BLOCK_ONLY_HIGH". The default value is "BLOCK_MEDIUM_AND_ABOVE".}
 }
 \value{
 Response is a single character string returned without any cleaning. See cleanTable to do some rudimentary cleaning to return a table.

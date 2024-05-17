@@ -7,7 +7,7 @@
 #' @param apiKey Google Developer's API key. Needed to run the function. See https://ai.google.dev/gemini-api/docs/api-key
 #' @param image If type is "image" this should be the local directory location of the image or a url.
 #' @param temperature numeric value between 0 and 1. Temperature is a Gemini parameter that controls the degree of randomness and creativity in the response. For more deterministic and repeatable responses, use a lower number. Higher temperatures may yield greater possibility of hallucination.
-#' @param safety Threshold for blocking responses. Currently, only one value can be set for all safety categories. Possible values are "HARM_BLOCK_THRESHOLD_UNSPECIFIED", "BLOCK_LOW_AND_ABOVE","BLOCK_MEDIUM_AND_ABOVE","BLOCK_ONLY_HIGH". The default value is "BLOCK_LOW_AND_ABOVE".
+#' @param safety Safety threshold for blocking responses. Currently, only one value can be set for all safety categories. Possible values are "HARM_BLOCK_THRESHOLD_UNSPECIFIED", "BLOCK_LOW_AND_ABOVE","BLOCK_MEDIUM_AND_ABOVE","BLOCK_ONLY_HIGH". The default value is "BLOCK_MEDIUM_AND_ABOVE".
 #'
 #' @return
 #' Response is a single character string returned without any cleaning. See cleanTable to do some rudimentary cleaning to return a table.
@@ -23,7 +23,7 @@
 #' #Sending an image
 #' sendPrompt(prompt="What does this image show?", type="image", image= "https://en.wikipedia.org/static/images/icons/wikipedia.png", apiKey="###")
 #' }
-sendPrompt <- function(prompt, type="text", apiKey=NULL, image=NULL, temperature=0, safety="BLOCK_LOW_AND_ABOVE"){
+sendPrompt <- function(prompt, type="text", apiKey=NULL, image=NULL, temperature=0, safety="BLOCK_MEDIUM_AND_ABOVE"){
 
   if(!curl::has_internet()){
     stop("Internet connection needed to run this function. Check connectivity.", call.=FALSE)
