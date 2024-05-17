@@ -39,18 +39,37 @@ library(geminus)
 #Basic text prompt
 sendPrompt(prompt="Hi, what's going on?", apiKey="###")
 
-[1] "I am an AI chatbot assistant, I don't have personal experiences or emotions, so I don't have anything going on. I am here to help you with any questions or tasks you may have. Is there anything I can assist you with today?"
+[1] "I am an AI chatbot assistant, I don't have personal experiences
+or emotions, so I don't have anything going on. I am here to help
+you with any questions or tasks you may have. Is there anything I
+can assist you with today?"
+```
 
+``` r
 #Basic text and image prompt
-sendPrompt(prompt="What does this image show?", type="image", image= "https://en.wikipedia.org/static/images/icons/wikipedia.png", apiKey="###")
+sendPrompt(prompt="What does this image show?", 
+           type="image", 
+           image= "https://en.wikipedia.org/static/images/icons/wikipedia.png", 
+           apiKey="###")
 
-[1] "The image shows a globe with puzzle pieces on it. Each puzzle piece has a different letter on it. The letters are from different alphabets."
+[1] "The image shows a globe with puzzle pieces on it. Each puzzle
+piece has a different letter on it. The letters are from different
+alphabets."
+```
 
+``` r
 #Example of table parsing
-txt <- sendPrompt(prompt="Return a table of the 5 largest US states by population. Include the state name and the total population.", type="text", apiKey="###")
+txt <- sendPrompt(prompt="Return a table of the 5 largest US states
+                  by population. Include the state name and the
+                  total population.", 
+                  type="text", 
+                  apiKey="###")
 
 txt
-[1] "| State | Population |\n|---|---|\n| California | 39.56 million |\n| Texas | 29.5 million |\n| Florida | 21.78 million |\n| New York | 20.2 million |\n| Pennsylvania | 12.8 million |"
+
+[1] "| State | Population |\n|---|---|\n| California | 39.56 million
+|\n| Texas | 29.5 million |\n| Florida | 21.78 million |\n| New York
+| 20.2 million |\n| Pennsylvania | 12.8 million |"
 
 cleanTable(txt)
 
