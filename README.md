@@ -6,7 +6,7 @@ Andy Gougherty
 ## Overview
 
 Functions in this package provide an easy way for sending basic requests
-to Google’s Gemini API. The functions here build off our paper testing
+to Google’s Gemini API. The functions here build off our work testing
 the reliability of an earlier version of the LLM to extract information
 from the scientific literature (see
 [here](https://doi.org/10.1038/s44185-024-00043-9) for more details).
