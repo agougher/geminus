@@ -13,7 +13,7 @@ from the scientific literature (see
 The functions were built specifically with scientific research in mind,
 so are likely not useful for all purposes.
 
-The main function in this package is `sendPrompt` which sends a text or
+The main function in this package is `sendPrompt` which sends text or
 text and image to the LLM and will return a single text string as a
 response. When tabular data is requested, the `cleanTable` function can
 be used to attempt to parse the text string to a data frame, based on
