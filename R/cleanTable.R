@@ -1,3 +1,18 @@
+#' Parsing text string to a table
+#'
+#' This function takes a text string from the sendPrompt function and attempts to parse it to a dataframe. Much of the parsing was done via trial and error in trying to understand how Gemini returns tables. In general, it is important to specify the column names in the sendPrompt function and how the text should be delimited. The default values in this function should work ok when no particular instructions were given, but it is very important to verify the output.
+#'
+#' @param txt Single text string from sendPrompt to attempt to parse into a table
+#' @param rowsplit Character used to split rows of the table
+#' @param newline Character used to identify a new line
+#'
+#' @return A dataframe parsed from the text string
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' cleanTable(sendPrompt(prompt="Return a table of the 5 largest US states by population. Include the state name and the total population.", type="text", apiKey="###"))
+#' }
 cleanTable <- function(txt, rowsplit="|", newline="\\n"){
   '%>%' <- purrr::'%>%'
   out <- purrr::map(txt, function(x) {

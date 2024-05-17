@@ -1,3 +1,28 @@
+#' Sending prompts to Gemini API
+#'
+#' The function allows the user to send prompts to Google's Gemini API. Prompts can be either just text or text and an image. Currently, the function will only return one text string as a response. When asking the LLM to return a table, it is important to be very clear about which symbols should be used as row and newline delimiters. Rudimentary cleaning to convert a single text string (returned from this function) to a table can be done with the cleanTable function, but results need to verified to be sure it was parsed correctly. Check the Gemini API website for current rate limits.
+#'
+#' @param prompt Text prompt to send to Gemini. Should be a single text string.
+#' @param type Can be either "text" or "image". If "image" the directory location or url of the image should be given.
+#' @param apiKey Google Developer's API key. Needed to run the function. See https://ai.google.dev/gemini-api/docs/api-key
+#' @param image If type is "image" this should be the local directory location of the image or a url.
+#' @param temperature numeric value between 0 and 1. Temperature is a Gemini parameter that controls the degree of randomness and creativity in the response. For more deterministic and repeatable responses, use a lower number. Higher temperatures may yield greater possibility of hallucination.
+#' @param safety Threshold for blocking responses. Currently, only one value can be set for all safety categories. Possible values are "HARM_BLOCK_THRESHOLD_UNSPECIFIED", "BLOCK_LOW_AND_ABOVE","BLOCK_MEDIUM_AND_ABOVE","BLOCK_ONLY_HIGH". The default value is "BLOCK_LOW_AND_ABOVE".
+#'
+#' @return
+#' Response is a single character string returned without any cleaning. See cleanTable to do some rudimentary cleaning to return a table.
+#' @export
+#'
+#'@references
+#'https://ai.google.dev/gemini-api/docs/models/gemini
+#' @examples
+#' \dontrun{
+#' #Simple text  prompt
+#' sendPrompt(prompt="Hi, how are you?", apiKey="###")
+#'
+#' #Sending an image
+#' sendPrompt(prompt="What does this image show?", type="image", image= "https://en.wikipedia.org/static/images/icons/wikipedia.png", apiKey="###")
+#' }
 sendPrompt <- function(prompt, type="text", apiKey=NULL, image=NULL, temperature=0, safety="BLOCK_LOW_AND_ABOVE"){
 
   if(!curl::has_internet()){

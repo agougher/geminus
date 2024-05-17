@@ -4,7 +4,8 @@ Title: Simple functions for interacting with Google's Gemini API
 Version: 0.1.0
 Author: Andy Gougherty
 Maintainer: Andy Gougherty <andrew.gougherty@usda.gov>
-Description: 
+Description: Functions in this package provide an easy way for sending text and image prompts to Google’s Gemini API. 
+Depends: httr, base64enc, curl, purrr, tibble
 License: MIT
 Encoding: UTF-8
 LazyData: true
