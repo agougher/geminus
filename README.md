@@ -22,7 +22,7 @@ however, should be carefully checked to make sure it was parsed
 correctly.
 
 Note, an [API key](https://ai.google.dev/gemini-api/docs/api-key) is
-needed for the functions to run. Also, see the Gemini [help
+needed for these functions to run. Also, see the Gemini [help
 documents](https://ai.google.dev/gemini-api/docs/api-overview) for
 specifics about how the API works and current rate limits.
 
