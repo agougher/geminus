@@ -22,7 +22,7 @@ Note, an [API key](https://ai.google.dev/gemini-api/docs/api-key) is needed for 
 ### Installation
 
 ```{r eval=FALSE}
-devtools::install_github("agougher/geminus")
+devtools::install_github("agougher/geminus", dependencies=TRUE)
 library(geminus)
 
 ```

@@ -14,6 +14,7 @@
 #' cleanTable(sendPrompt(prompt="Return a table of the 5 largest US states by population. Include the state name and the total population.", type="text", apiKey="###"))
 #' }
 cleanTable <- function(txt, rowsplit="|", newline="\\n"){
+
   '%>%' <- purrr::'%>%'
   out <- purrr::map(txt, function(x) {
     tibble::tibble(text = unlist(stringr::str_split(x, pattern = newline))) %>%
@@ -22,7 +23,6 @@ cleanTable <- function(txt, rowsplit="|", newline="\\n"){
 
 
   out <- out[[1]]
-
 
   #remove white spaces, and split based on vertical bar, which is used as the delimiter
   out <- as.data.frame(trimws(do.call('rbind', strsplit(out$text, split=rowsplit, fixed=TRUE)), which=c("both")))

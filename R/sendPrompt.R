@@ -44,6 +44,7 @@ sendPrompt <- function(prompt, type="text", apiKey=NULL, image=NULL, temperature
   }
 
 
+  #For text
   if(type == "text"){
 
     if(!is.null(image)){
@@ -89,6 +90,7 @@ sendPrompt <- function(prompt, type="text", apiKey=NULL, image=NULL, temperature
 
   }
 
+  #For images
   if(type == "image"){
 
     if(is.null(image)){
@@ -134,7 +136,6 @@ sendPrompt <- function(prompt, type="text", apiKey=NULL, image=NULL, temperature
     if(httr::content(res)$candidates[[1]]$finishReason == "SAFETY"){
       warning("No response returned due to safety. Consider increasing the safety threshold.", call.=FALSE)
     } else {
-
       return(trimws(httr::content(res)$candidates[[1]]$content$parts[[1]]$text))
     }
 
