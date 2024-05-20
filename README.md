@@ -1,7 +1,7 @@
 geminus: Simple R functions for interacting with the Gemini API
 ================
 Andy Gougherty
-2024-05-17
+2024-05-20
 
 ## Overview
 
@@ -29,7 +29,7 @@ specifics about how the API works and current rate limits.
 ### Installation
 
 ``` r
-devtools::install_github("agougher/geminus")
+devtools::install_github("agougher/geminus", dependencies = TRUE)
 library(geminus)
 ```
 
