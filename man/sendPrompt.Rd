@@ -10,7 +10,8 @@ sendPrompt(
   apiKey = NULL,
   image = NULL,
   temperature = 0,
-  safety = "BLOCK_MEDIUM_AND_ABOVE"
+  safety = "BLOCK_MEDIUM_AND_ABOVE",
+  model = "gemini-1.5-flash"
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ sendPrompt(
 \item{temperature}{numeric value between 0 and 1. Temperature is a Gemini parameter that controls the degree of randomness and creativity in the response. For more deterministic and repeatable responses, use a lower number. Higher temperatures may yield greater possibility of hallucination.}
 
 \item{safety}{Safety threshold for blocking responses. Currently, only one value can be set for all safety categories. Possible values are "HARM_BLOCK_THRESHOLD_UNSPECIFIED", "BLOCK_LOW_AND_ABOVE","BLOCK_MEDIUM_AND_ABOVE","BLOCK_ONLY_HIGH". The default value is "BLOCK_MEDIUM_AND_ABOVE".}
+
+\item{model}{Model to be used. Default is "gemini-1.5-flash" which can be used for text or images. See https://ai.google.dev/gemini-api/docs/models/gemini for other options.}
 }
 \value{
 Response is a single character string returned without any cleaning. See cleanTable to do some rudimentary cleaning to return a table.
