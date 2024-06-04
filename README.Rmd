@@ -37,6 +37,11 @@ sendPrompt(prompt="Hi, what's going on?", apiKey="###")
 or emotions, so I don't have anything going on. I am here to help
 you with any questions or tasks you may have. Is there anything I
 can assist you with today?"
+
+#Get the number of tokens used in a prompt
+countTokens(prompt="Hi, what's going on?", apiKey="###")
+
+[1] 8
 ```
 
 ```{r eval=FALSE}
