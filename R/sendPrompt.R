@@ -68,7 +68,7 @@ sendPrompt <- function(prompt, type="text", apiKey=NULL, image=NULL, temperature
       safetySettings = safetySetting
     )
 
-    #url <- "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key="
+
     url <- paste0("https://generativelanguage.googleapis.com/v1beta/models/",model, ":generateContent?key=")
 
     # Add the API key to the URL

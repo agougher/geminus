@@ -27,13 +27,13 @@ sendPrompt(
 
 \item{safety}{Safety threshold for blocking responses. Currently, only one value can be set for all safety categories. Possible values are "HARM_BLOCK_THRESHOLD_UNSPECIFIED", "BLOCK_LOW_AND_ABOVE","BLOCK_MEDIUM_AND_ABOVE","BLOCK_ONLY_HIGH". The default value is "BLOCK_MEDIUM_AND_ABOVE".}
 
-\item{model}{Model to be used. Default is "gemini-1.5-flash" which can be used for text or images. See https://ai.google.dev/gemini-api/docs/models/gemini for other options.}
+\item{model}{Gemini model variant to be used. Default is "gemini-1.5-flash" which can be used for text or images. See https://ai.google.dev/gemini-api/docs/models/gemini for other options.}
 }
 \value{
 Response is a single character string returned without any cleaning. See cleanTable to do some rudimentary cleaning to return a table.
 }
 \description{
-The function allows the user to send prompts to Google's Gemini API. Prompts can be either just text or text and an image. Currently, the function will only return one text string as a response. When asking the LLM to return a table, it is important to be very clear about which symbols should be used as row and newline delimiters. Rudimentary cleaning to convert a single text string (returned from this function) to a table can be done with the cleanTable function, but results need to verified to be sure it was parsed correctly. Check the Gemini API website for current rate limits.
+The function sends prompts to Google's Gemini API and returns a text string as response. Prompts can be either text or text and an image. Currently, the function will only return one text string as a response. When asking the LLM to return a table, it is important to be very clear about which symbols should be used as row and newline delimiters. Rudimentary cleaning to convert a single text string (returned from this function) to a table can be done with the cleanTable function, but results need to verified to be sure it was parsed correctly. Check the Gemini API website for current rate limits.
 }
 \examples{
 \dontrun{
