@@ -82,12 +82,12 @@ sendPrompt <- function(prompt, type="text", apiKey=NULL, image=NULL, temperature
     res <- httr::POST(url, body = jsonToSend,encode="json", addHeaders = headers)
 
     if(httr::content(res)$candidates[[1]]$finishReason == "SAFETY"){
-      warning("No response returned due to safety. Consider adjusting the safety threshold.", call.=FALSE)
+      warning("No response returned due to safety. Consider increasing the safety threshold.", call.=FALSE)
+    } else if(httr::content(res)$candidates[[1]]$finishReason == "RECITATION"){
+      warning("No response returned due to recitation.", call.=FALSE)
     } else {
-
       return(trimws(httr::content(res)$candidates[[1]]$content$parts[[1]]$text))
     }
-
 
 
 
@@ -138,7 +138,9 @@ sendPrompt <- function(prompt, type="text", apiKey=NULL, image=NULL, temperature
 
     if(httr::content(res)$candidates[[1]]$finishReason == "SAFETY"){
       warning("No response returned due to safety. Consider increasing the safety threshold.", call.=FALSE)
-    } else {
+    } else if(httr::content(res)$candidates[[1]]$finishReason == "RECITATION"){
+      warning("No response returned due to recitation.", call.=FALSE)
+      } else {
       return(trimws(httr::content(res)$candidates[[1]]$content$parts[[1]]$text))
     }
 
