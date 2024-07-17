@@ -1,5 +1,5 @@
 ---
-title: "geminus: Simple R functions for interacting with the Gemini API"
+title: "geminus: Simple R functions for interacting with Gemini & GPT APIs"
 author: "Andy Gougherty"
 date: "`r Sys.Date()`"
 output: github_document
@@ -13,11 +13,11 @@ knitr::opts_chunk$set(echo=TRUE, tidy.opts = list(width.cutoff = 60), tidy = TRU
 
 ## Overview
 
-Functions in this package provide an easy way to send basic requests to Google's Gemini API. The functions here build off our work testing the reliability of an earlier version of the LLM to extract information from the scientific literature (see [here](https://doi.org/10.1038/s44185-024-00043-9) for more details). The functions were built specifically for synthesizing large amounts of text for meta-analyses, so they are likely not useful for all purposes.
+Functions in this package provide an easy way to send basic requests to Google's Gemini API and OpenAI's GPT API. The functions here build off our work testing the reliability of an earlier version of Gemini to extract information from the scientific literature (see [here](https://doi.org/10.1038/s44185-024-00043-9) for more details). The functions were built specifically for synthesizing large amounts of text for meta-analyses, so they are likely not useful for all purposes.
 
-The main function in this package is `sendPrompt` which sends text and/or image prompts to the Gemini LLM and will return a single text string as a response. When tabular data is requested, the `cleanTable` function can be used to attempt to parse the text string to a data frame, based on how, in my experience, Gemini frequently returns tables. The table, however, should be carefully checked to make sure it was parsed correctly.
+The main function in this package is `sendPrompt` which sends text and/or image prompts to the Gemini or GPT LLM and will return a single text string as a response. When tabular data is requested, the `cleanTable` function can be used to attempt to parse the text string to a data frame, based on how, in my experience, the LLMs frequently returns tables. The table, however, should be carefully checked to make sure it was parsed correctly.
 
-Note, an [API key](https://ai.google.dev/gemini-api/docs/api-key) is needed for these functions to run. Also, see the Gemini [help documents](https://ai.google.dev/gemini-api/docs/api-overview) for specifics about how the API works and current rate limits.
+Note, a Gemini or OpenAI API key is needed for these functions to run, and the key must match the respective Gemini or GPT model being called (i.e., a Gemini key can't be used for GPT). These functions support multiple model variants (e.g., Gemini 1.5 Flash, Gemini 1.5 Pro, GPT-3.5 Turbo, GPT-4o) but only the flagship Gemini and GPT models. The default is Gemini 1.5 Flash.
 
 ### Installation
 
@@ -79,4 +79,3 @@ cleanTable(txt)
 6     New York  20.2 million
 7 Pennsylvania  12.8 million
 ```
-

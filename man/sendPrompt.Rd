@@ -2,38 +2,41 @@
 % Please edit documentation in R/sendPrompt.R
 \name{sendPrompt}
 \alias{sendPrompt}
-\title{Sending prompts to Gemini API}
+\title{Sending prompts to Gemini & GPT APIs}
 \usage{
 sendPrompt(
   prompt,
   type = "text",
   apiKey = NULL,
   image = NULL,
+  imageDetail = "low",
   temperature = 0,
   safety = "BLOCK_MEDIUM_AND_ABOVE",
   model = "gemini-1.5-flash"
 )
 }
 \arguments{
-\item{prompt}{Text prompt to send to Gemini. Should be a single text string.}
+\item{prompt}{Text prompt to send to Gemini or GPT. Should be a single text string.}
 
 \item{type}{Can be either "text" or "image". If "image" the directory location or url of the image should be given.}
 
-\item{apiKey}{Google Developer's API key. Needed to run the function. See https://ai.google.dev/gemini-api/docs/api-key}
+\item{apiKey}{Google Developer's API key or OpenAI's API key. Needed to run the function. See https://ai.google.dev/gemini-api/docs/api-key}
 
 \item{image}{If type is "image" this should be the local directory location of the image or a url.}
 
-\item{temperature}{numeric value between 0 and 1. Temperature is a Gemini parameter that controls the degree of randomness and creativity in the response. For more deterministic and repeatable responses, use a lower number. Higher temperatures may yield greater possibility of hallucination.}
+\item{imageDetail}{Image resolution used for GPT model. Can be "low" or "high"}
 
-\item{safety}{Safety threshold for blocking responses. Currently, only one value can be set for all safety categories. Possible values are "HARM_BLOCK_THRESHOLD_UNSPECIFIED", "BLOCK_LOW_AND_ABOVE","BLOCK_MEDIUM_AND_ABOVE","BLOCK_ONLY_HIGH". The default value is "BLOCK_MEDIUM_AND_ABOVE".}
+\item{temperature}{Temperature is a parameter that controls the degree of randomness and creativity in the response. For more deterministic and repeatable responses, use a lower number. Higher temperatures may yield greater possibility of hallucination. For Gemini, the temperature should be between 0 and 1, and for GPT between 0 and 2.}
 
-\item{model}{Gemini model variant to be used. Default is "gemini-1.5-flash" which can be used for text or images. See https://ai.google.dev/gemini-api/docs/models/gemini for other options.}
+\item{safety}{Safety threshold for blocking responses in Gemini. Currently, only one value can be set for all safety categories. Possible values are "HARM_BLOCK_THRESHOLD_UNSPECIFIED", "BLOCK_LOW_AND_ABOVE","BLOCK_MEDIUM_AND_ABOVE","BLOCK_ONLY_HIGH". The default value is "BLOCK_MEDIUM_AND_ABOVE".}
+
+\item{model}{Model variant to be used. Default is "gemini-1.5-flash" which can be used for text or images. See https://ai.google.dev/gemini-api/docs/models/gemini and https://platform.openai.com/docs/models for other options. Currently only "Gemini" and "GPT" models are supported.}
 }
 \value{
 Response is a single character string returned without any cleaning. See cleanTable to do some rudimentary cleaning to return a table.
 }
 \description{
-The function sends prompts to Google's Gemini API and returns a text string as response. Prompts can be either text or text and an image. Currently, the function will only return one text string as a response. When asking the LLM to return a table, it is important to be very clear about which symbols should be used as row and newline delimiters. Rudimentary cleaning to convert a single text string (returned from this function) to a table can be done with the cleanTable function, but results need to verified to be sure it was parsed correctly. Check the Gemini API website for current rate limits.
+The function sends prompts to Google's Gemini API and OpenAI's GPT APIs, and returns a text string as response. Prompts can be either text or text and an image. Currently, the function will only return one text string as a response. When asking the LLM to return a table, it is important to be very clear about which symbols should be used as row and newline delimiters. Rudimentary cleaning to convert a single text string (returned from this function) to a table can be done with the cleanTable function, but results need to verified to be sure it was parsed correctly. Check the Gemini and GPT websites for current rate limits.
 }
 \examples{
 \dontrun{
