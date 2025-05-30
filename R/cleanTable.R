@@ -26,13 +26,25 @@ cleanTable <- function(txt, rowsplit="|", newline="\\n"){
 
   #remove white spaces, and split based on vertical bar, which is used as the delimiter
   out <- as.data.frame(trimws(do.call('rbind', strsplit(out$text, split=rowsplit, fixed=TRUE)), which=c("both")))
+
   #in some previous runs, there was a remnant | at the beginning or end
   out[,1] <-  gsub(out[,1], pattern=paste0(rowsplit, " "), replacement="", fixed=TRUE)
   out[,ncol(out)] <-  gsub(out[,ncol(out)], pattern=paste0(" ",rowsplit), replacement="", fixed=TRUE)
 
+
+  #if all the values in the row are the same as the first value remove it
+  #in some initial runs the number of dashes were note the same
+  #previously this was done below, but gpt sometimes returns a first row of "```\n", this should remove that row before setting the column names
+  #This will effectively also remove any message the LLM returns before the table
+  if(any(apply(out, 1, function(x) all(x == x[1])))){
+    out <- out[-which(apply(out, 1, function(x) all(x == x[1]))),]
+  }
+
   #set the first row as the column names, and remove the first row
   names(out) <- out[1,]
   out <- out[-1,]
+
+
 
   #if a column is all blanks, remove it
   #sometimes the row splits an empty row at the beginning
@@ -41,8 +53,10 @@ cleanTable <- function(txt, rowsplit="|", newline="\\n"){
 
   }
 
+
   #if all the values in the row are the same as the first value remove it
   #in some initial runs the number of dashes were note the same
+  #also done above, as sometimes the values are all the same except the first column which is just blank
   if(any(apply(out, 1, function(x) all(x == x[1])))){
     out <- out[-which(apply(out, 1, function(x) all(x == x[1]))),]
   }
@@ -53,6 +67,13 @@ cleanTable <- function(txt, rowsplit="|", newline="\\n"){
     out <- out[-which(apply(out,1,function(x) length(unique(strsplit(paste(x, collapse=""),"")[[1]])) == 1)),]
 
   }
+
+  #if the row only has only one unique character AFTER the first character, remove it (sometimes it returns :--- with -'s of various lengths)
+  if(any(apply(out,1,function(x) length(unique(strsplit(paste(str_sub(x,start=2), collapse=""),"")[[1]])) == 1))){
+    out <- out[-which(apply(out,1,function(x) length(unique(strsplit(paste(str_sub(x,start=2), collapse=""),"")[[1]])) == 1)),]
+
+  }
+
 
   return(out)
 

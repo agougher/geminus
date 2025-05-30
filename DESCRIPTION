@@ -1,12 +1,12 @@
 Package: geminus
 Type: Package
-Title: Simple functions for interacting with Google's Gemini API
+Title: Simple functions for interacting with Google's Gemini API & OpenAI's GPT API 
 Version: 0.1.0
 Author: Andy Gougherty
 Maintainer: Andy Gougherty <andrew.gougherty@usda.gov>
-Description: Functions in this package provide an easy way for sending text and image prompts to Google’s Gemini API. 
-Depends: httr, base64enc, curl, purrr, tibble
+Description: Functions in this package provide an easy way for sending text and image prompts to Gemini and GPT APIs. 
+Depends: httr, base64enc, curl, purrr, tibble, stringr
 License: MIT
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
