@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo=TRUE, tidy.opts = list(width.cutoff = 60), tidy = TRU
 
 Functions in this package provide an easy way to send basic requests to Google's Gemini API and OpenAI's GPT API. The functions here build off our work testing the reliability of an earlier version of Gemini to extract information from the scientific literature (see [here](https://doi.org/10.1038/s44185-024-00043-9) for more details). The functions were built specifically for synthesizing large amounts of text for meta-analyses, so they are likely not useful for all purposes.
 
-The main function in this package is `sendPrompt` which sends text and/or image prompts to the Gemini or GPT LLM and will return a single text string as a response. When tabular data is requested, the `cleanTable` function can be used to attempt to parse the text string to a data frame, based on how, in my experience, the LLMs frequently returns tables. The table, however, should be carefully checked to make sure it was parsed correctly.
+The main function in this package is `sendPrompt` which sends text prompts, optionally with an image or pdf, to the Gemini or GPT LLMs and will return a single text string as a response. When tabular data is requested, the `cleanTable` function can be used to attempt to parse the text string to a data frame, based on how, in my experience, the LLMs frequently returns tables. The table, however, should be carefully checked to make sure it was parsed correctly.
 
 Note, a Gemini or OpenAI API key is needed for these functions to run, and the key must match the respective Gemini or GPT model being called (i.e., a Gemini key can't be used for GPT). These functions support multiple model variants (e.g., Gemini 1.5 Flash, Gemini 1.5 Pro, GPT-3.5 Turbo, GPT-4o) but only the flagship Gemini and GPT models. The default is Gemini 1.5 Flash.
 
@@ -47,8 +47,7 @@ countTokens(prompt="Hi, what's going on?", apiKey="###")
 ```{r eval=FALSE}
 #Basic text and image prompt
 sendPrompt(prompt="What does this image show?", 
-           type="image", 
-           image= "https://en.wikipedia.org/static/images/icons/wikipedia.png", 
+           file = "https://en.wikipedia.org/static/images/icons/wikipedia.png", 
            apiKey="###")
 
 [1] "The image shows a globe with puzzle pieces on it. Each puzzle

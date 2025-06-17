@@ -1,7 +1,7 @@
 geminus: Simple R functions for interacting with Gemini & GPT APIs
 ================
 Andy Gougherty
-2024-07-16
+2025-06-16
 
 ## Overview
 
@@ -14,12 +14,12 @@ The functions were built specifically for synthesizing large amounts of
 text for meta-analyses, so they are likely not useful for all purposes.
 
 The main function in this package is `sendPrompt` which sends text
-and/or image prompts to the Gemini or GPT LLM and will return a single
-text string as a response. When tabular data is requested, the
-`cleanTable` function can be used to attempt to parse the text string to
-a data frame, based on how, in my experience, the LLMs frequently
-returns tables. The table, however, should be carefully checked to make
-sure it was parsed correctly.
+prompts, optionally with an image or pdf, to the Gemini or GPT LLMs and
+will return a single text string as a response. When tabular data is
+requested, the `cleanTable` function can be used to attempt to parse the
+text string to a data frame, based on how, in my experience, the LLMs
+frequently returns tables. The table, however, should be carefully
+checked to make sure it was parsed correctly.
 
 Note, a Gemini or OpenAI API key is needed for these functions to run,
 and the key must match the respective Gemini or GPT model being called
@@ -55,8 +55,7 @@ countTokens(prompt="Hi, what's going on?", apiKey="###")
 ``` r
 #Basic text and image prompt
 sendPrompt(prompt="What does this image show?", 
-           type="image", 
-           image= "https://en.wikipedia.org/static/images/icons/wikipedia.png", 
+           file = "https://en.wikipedia.org/static/images/icons/wikipedia.png", 
            apiKey="###")
 
 [1] "The image shows a globe with puzzle pieces on it. Each puzzle
