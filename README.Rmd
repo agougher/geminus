@@ -33,10 +33,9 @@ library(geminus)
 #Basic text prompt
 sendPrompt(prompt="Hi, what's going on?", apiKey="###")
 
-[1] "I am an AI chatbot assistant, I don't have personal experiences
-or emotions, so I don't have anything going on. I am here to help
-you with any questions or tasks you may have. Is there anything I
-can assist you with today?"
+[1] "Not much is going on with me, as I'm just a large language model. 
+How about you? What's happening in your world?"
+
 
 #Get the number of tokens used in a prompt
 countTokens(prompt="Hi, what's going on?", apiKey="###")
@@ -47,34 +46,32 @@ countTokens(prompt="Hi, what's going on?", apiKey="###")
 ```{r eval=FALSE}
 #Basic text and image prompt
 sendPrompt(prompt="What does this image show?", 
-           file = "https://en.wikipedia.org/static/images/icons/wikipedia.png", 
+           filePath = "https://en.wikipedia.org/static/images/icons/wikipedia.png", 
            apiKey="###")
 
-[1] "The image shows a globe with puzzle pieces on it. Each puzzle
-piece has a different letter on it. The letters are from different
-alphabets."
+"That's the Wikipedia logo, but modified to show a missing piece. 
+Specifically, it depicts the Wikipedia globe with a section missing,
+representing a gap or incompleteness in the project's coverage.  The
+missing piece likely symbolizes a language edition or topic area that is
+underdeveloped or absent."
 ```
 
 ```{r eval=FALSE}
 #Example of table parsing
 txt <- sendPrompt(prompt="Return a table of the 5 largest US states
-                  by population. Include the state name and the
-                  total population.", 
-                  type="text", 
+                  by population. Use the column names 'state' and 'population'. Return only the table.", 
                   apiKey="###")
 
 txt
 
-[1] "| State | Population |\n|---|---|\n| California | 39.56 million
-|\n| Texas | 29.5 million |\n| Florida | 21.78 million |\n| New York
-| 20.2 million |\n| Pennsylvania | 12.8 million |"
+[1] "| state | population |\n|---|---|\n| California | 39237836 |\n| Texas | 30028194 |\n| Florida | 22244823 |\n| New York | 20201249 |\n| Pennsylvania | 13002700 |"
 
 cleanTable(txt)
 
-         State    Population
-3   California 39.56 million
-4        Texas  29.5 million
-5      Florida 21.78 million
-6     New York  20.2 million
-7 Pennsylvania  12.8 million
+         state population
+3   California   39237836
+4        Texas   30028194
+5      Florida   22244823
+6     New York   20201249
+7 Pennsylvania   13002700
 ```
