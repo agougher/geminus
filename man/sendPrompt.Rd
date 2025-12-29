@@ -11,7 +11,8 @@ sendPrompt(
   imageDetail = "low",
   temperature = 0,
   safety = "BLOCK_MEDIUM_AND_ABOVE",
-  model = "gemini-1.5-flash"
+  model = "gemini-2.0-flash-lite",
+  timeOut = 30
 )
 }
 \arguments{
@@ -27,7 +28,9 @@ sendPrompt(
 
 \item{safety}{Safety threshold for blocking responses in Gemini. Currently, only one value can be set for all safety categories. Possible values are "HARM_BLOCK_THRESHOLD_UNSPECIFIED", "BLOCK_LOW_AND_ABOVE","BLOCK_MEDIUM_AND_ABOVE","BLOCK_ONLY_HIGH". The default value is "BLOCK_MEDIUM_AND_ABOVE".}
 
-\item{model}{Model variant to be used. Default is "gemini-1.5-flash" which can be used for text or images. See https://ai.google.dev/gemini-api/docs/models/gemini and https://platform.openai.com/docs/models for other options. Currently only the flagship models are supported.}
+\item{model}{Model variant to be used. Default is "gemini-2.0-flash-lite" which can be used for text or images. See https://ai.google.dev/gemini-api/docs/models/gemini and https://platform.openai.com/docs/models for other options. Currently only the flagship models are supported.}
+
+\item{timeOut}{Set timeout length. Default is 30s. May want to lengthen for deeper "thinking" tasks.}
 }
 \value{
 Response is a single character string returned without any cleaning. See cleanTable to do some rudimentary cleaning to return a table.

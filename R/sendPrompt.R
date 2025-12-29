@@ -8,7 +8,8 @@
 #' @param imageDetail Image resolution used for GPT models. Can be "low" or "high"
 #' @param temperature Temperature is a parameter that controls the degree of randomness and creativity in the response. For more deterministic and repeatable responses, use a lower number. Higher temperatures may yield greater possibility of hallucination. For Gemini, the temperature should be between 0 and 1, and for GPT between 0 and 2.
 #' @param safety Safety threshold for blocking responses in Gemini. Currently, only one value can be set for all safety categories. Possible values are "HARM_BLOCK_THRESHOLD_UNSPECIFIED", "BLOCK_LOW_AND_ABOVE","BLOCK_MEDIUM_AND_ABOVE","BLOCK_ONLY_HIGH". The default value is "BLOCK_MEDIUM_AND_ABOVE".
-#' @param model Model variant to be used. Default is "gemini-1.5-flash" which can be used for text or images. See https://ai.google.dev/gemini-api/docs/models/gemini and https://platform.openai.com/docs/models for other options. Currently only the flagship models are supported.
+#' @param model Model variant to be used. Default is "gemini-2.0-flash-lite" which can be used for text or images. See https://ai.google.dev/gemini-api/docs/models/gemini and https://platform.openai.com/docs/models for other options. Currently only the flagship models are supported.
+#'@param timeOut Set timeout length. Default is 30s. May want to lengthen for deeper "thinking" tasks.
 #'
 #' @return
 #' Response is a single character string returned without any cleaning. See cleanTable to do some rudimentary cleaning to return a table.
@@ -24,7 +25,7 @@
 #' #Sending an image
 #' sendPrompt(prompt="What does this image show?", filePath = "https://en.wikipedia.org/static/images/icons/wikipedia.png", apiKey="###")
 #' }
-sendPrompt <- function(prompt, apiKey=NULL, filePath=NULL, imageDetail="low", temperature=0, safety="BLOCK_MEDIUM_AND_ABOVE", model="gemini-1.5-flash"){
+sendPrompt <- function(prompt, apiKey=NULL, filePath=NULL, imageDetail="low", temperature=0, safety="BLOCK_MEDIUM_AND_ABOVE", model="gemini-2.0-flash-lite", timeOut=30){
 
   if(!curl::has_internet()){
     stop("Internet connection needed to run this function. Check connectivity.", call.=FALSE)
@@ -117,7 +118,7 @@ sendPrompt <- function(prompt, apiKey=NULL, filePath=NULL, imageDetail="low", te
     )
 
     # Send the POST request with JSON body
-    res <- httr::POST(url, body = jsonToSend,encode="json", addHeaders = headers)
+    res <- httr::POST(url, body = jsonToSend,encode="json", addHeaders = headers, config=httr::config(connecttimeout = timeOut))
 
     #Send some warnings if the model returns an error work
     if(httr::content(res)$candidates[[1]]$finishReason == "SAFETY"){
@@ -203,7 +204,8 @@ sendPrompt <- function(prompt, apiKey=NULL, filePath=NULL, imageDetail="low", te
       httr::add_headers(Authorization = paste("Bearer", apiKey)),
       httr::content_type_json(),
       encode = "json",
-      body = jsonToSend
+      body = jsonToSend,
+      config=httr::config(connecttimeout = timeOut)
     )
 
     return(content(response)$choices[[1]]$message$content)
